@@ -1,0 +1,107 @@
+@startuml
+package LLD.FlightReservation {
+
+class Flight {
+  - String flightNumber
+  - Aircraft aircraft
+  - Date departureTime
+  - String origin
+  - String destination
+  - List<Passenger> passengers
+  - List<CrewMember> crewMembers
+  + String getFlightNumber()
+  + void setFlightNumber(String)
+  + Aircraft getAircraft()
+  + void setAircraft(Aircraft)
+  + Date getDepartureTime()
+  + void setDepartureTime(Date)
+  + String getOrigin()
+  + void setOrigin(String)
+  + String getDestination()
+  + void setDestination(String)
+  + List<Passenger> getPassengers()
+  + void setPassengers(List<Passenger>)
+  + List<CrewMember> getCrewMembers()
+  + void setCrewMembers(List<CrewMember>)
+  + void addPassenger(Passenger)
+  + void addCrewMember(CrewMember)
+  + int getAvailableSeats()
+  + boolean bookSeat(Passenger)
+}
+
+class CrewMember {
+  - String name
+  - String employeeId
+  - Role role
+  + String getName()
+  + void setName(String)
+  + String getEmployeeId()
+  + void setEmployeeId(String)
+  + Role getRole()
+  + void setRole(Role)
+}
+
+class Aircraft {
+  - String registrationNumber
+  - String model
+  - int totalSeats
+  + String getRegistrationNumber()
+  + void setRegistrationNumber(String)
+  + String getModel()
+  + void setModel(String)
+  + int getTotalSeats()
+  + void setTotalSeats(int)
+}
+
+class AirlineManagementSystem {
+  - List<Flight> flights
+  - List<Passenger> passengers
+  - List<CrewMember> crewMembers
+  - List<Aircraft> aircrafts
+  + void addFlight(Flight)
+  + void addPassenger(Passenger)
+  + void addCrewMember(CrewMember)
+  + void addAircraft(Aircraft)
+  + List<Flight> getFlights()
+  + List<Passenger> getPassengers()
+  + List<CrewMember> getCrewMembers()
+  + List<Aircraft> getAircrafts()
+}
+
+class Passenger {
+  - String name
+  - String passportNumber
+  + String getName()
+  + void setName(String)
+  + String getPassportNumber()
+  + void setPassportNumber(String)
+}
+
+class AirlineReservationSystem {
+  - List<Flight> flights
+  - List<CrewMember> crewMembers
+  + {static} void main(String[])
+  + void addFlight(Flight)
+  + void addCrewMember(CrewMember)
+  + List<Flight> searchFlights(String, String, Date)
+}
+
+enum Role {
+  PILOT
+  CO_PILOT
+  CABIN_CREW
+}
+
+Flight --> Aircraft
+Flight --> Passenger : has
+Flight --> CrewMember : has
+AirlineManagementSystem --> Flight : manages
+AirlineManagementSystem --> Passenger : manages
+AirlineManagementSystem --> CrewMember : manages
+AirlineManagementSystem --> Aircraft : manages
+AirlineReservationSystem --> Flight : uses
+AirlineReservationSystem --> CrewMember : uses
+CrewMember --> Role
+
+}
+@enduml

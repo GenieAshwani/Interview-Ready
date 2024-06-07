@@ -1,0 +1,42 @@
+@startuml
+enum LLD.ParkingLot.VehicleType {
++  CAR
++  MOTORBIKE
++  TRUCK
+}
+
+class LLD.ParkingLot.ExitGate {
+- ParkingLot parkingLot
++ void allowExit(Vehicle)
+}
+
+
+class LLD.ParkingLot.Vehicle {
+- String plateNumber
+- VehicleType type
++ String getPlateNumber()
++ VehicleType getType()
+}
+
+
+class LLD.ParkingLot.ParkingLot {
+- int capacity
+- Map<String,Integer> parkedVehicles
+- int nextSlot
++ void parkVehicle(Vehicle)
++ void exitVehicle(Vehicle)
++ void findVehicle(String)
+}
+
+
+class LLD.ParkingLot.EntryGate {
+- ParkingLot parkingLot
++ void allowEntry(Vehicle)
+}
+
+
+class LLD.ParkingLot.Main {
++ {static} void main(String[])
+}
+
+@enduml
